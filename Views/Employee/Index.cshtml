@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Employee>
+
+<br />
+
+<h2>Employees</h2>
+<hr />
+<br />
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmploymentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PositionId)
+        </th>
+    </tr>
+
+    @foreach (var employee in Model)
+    {
+        @Html.HiddenFor(model => employee.EmployeeID)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => employee.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.EmployeeFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.EmploymentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.DepartmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => employee.PositionId)
+            </td>
+            <td>
+                <a asp-action="EditEmployee" asp-route-Id="@employee.EmployeeID"><i class="btn btn-outline-secondary">Edit</i></a>
+                <a asp-action="DeleteEmployee" asp-route-Id="@employee.EmployeeID"><i class="btn btn-outline-secondary">Delete</i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+<p>
+    <a asp-action="AddEmployee" asp-controller="Employee" class="btn btn-outline-success">Add new employee</a>
+</p>
