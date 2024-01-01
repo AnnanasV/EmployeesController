@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<Employee>
 
+@functions {
+    public string FormatDate(DateTime? date)
+    {
+        return date?.ToString("dd-MM-yyyy");
+    }
+}
+
 <br />
 
 <h2>Employees</h2>
@@ -8,9 +15,6 @@
 
 <table class="table table-striped">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeID)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.EmployeeFullName)
         </th>
@@ -33,19 +37,15 @@
 
     @foreach (var employee in Model)
     {
-        @Html.HiddenFor(model => employee.EmployeeID)
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => employee.EmployeeID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => employee.EmployeeFullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => employee.Birthday)
+                @FormatDate(employee.Birthday)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => employee.EmploymentDate)
+                @FormatDate(employee.EmploymentDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => employee.Salary)
