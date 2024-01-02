@@ -9,9 +9,29 @@
 
 <br />
 
-<h2>Employees</h2>
+<h2>Працівники</h2>
 <hr />
 <br />
+
+<form method="get" action="@Url.Action("FilterEmployees")">
+    <div class="form-group">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Фільтрування за ПІБ / Відділом / Посадою ...">
+    </div>
+    <div class="form-group">
+        <select name="sortBy" class="form-control">
+            <option value="EmployeeFullName">сортування за ПІБ</option>
+            <option value="Birthday">сортування за датою народження</option>
+            <option value="EmploymentDate">сортування за датою взяття на роботу</option>
+            <option value="Salary">сортування за окладом</option>
+            <option value="DepartmentId">сортування за відділом</option>
+            <option value="PositionId">сортування за посадою</option>
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Пошук</button>
+</form>
+
+<hr />
 
 <table class="table table-striped">
     <tr>
@@ -51,21 +71,20 @@
                 @Html.DisplayFor(modelItem => employee.Salary)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => employee.DepartmentId)
+                @ViewBag.Departments[employee.DepartmentId]
             </td>
             <td>
-                @Html.DisplayFor(modelItem => employee.PositionId)
+                @ViewBag.Positions[employee.PositionId]
             </td>
             <td>
-                <a asp-action="EditEmployee" asp-route-Id="@employee.EmployeeID"><i class="btn btn-outline-secondary">Edit</i></a>
-                <a asp-action="DeleteEmployee" asp-route-Id="@employee.EmployeeID"><i class="btn btn-outline-secondary">Delete</i></a>
+                <a asp-action="EditEmployee" asp-route-Id="@employee.EmployeeID"><i class="btn btn-outline-secondary">Редагувати</i></a>
+                <a asp-action="DeleteEmployee" asp-route-Id="@employee.EmployeeID"><i class="btn btn-outline-danger">Видалити</i></a>
             </td>
         </tr>
     }
-
 </table>
 
 <br />
 <p>
-    <a asp-action="AddEmployee" asp-controller="Employee" class="btn btn-outline-success">Add new employee</a>
+    <a asp-action="AddEmployee" asp-controller="Employee" class="btn btn-outline-success">Додати працівника</a>
 </p>
